@@ -10,7 +10,7 @@ public:
         int left = 0;
         int right = x;
         while (left <= right){
-           int mid = (left + right) / 2;      // ให้มันคำนวณได้หลายครั้ง
+           long long mid = (left + right) / 2;      // ให้มันคำนวณได้หลายครั้ง
             if (mid * mid < x){ 
                 left = mid + 1;           //move pointer to right
             } else if (mid * mid > x){
