@@ -17,9 +17,8 @@ public:
         ListNode* b = headB;
 
         while(a != b){
-           a = (a == nullptr)? a = headB : a->next; // if เเบบง่าย
-           b = (b == nullptr)? b = headA : b->next; 
-            if (a == b) return a;
+           a = (a == nullptr)? headB : a->next; // if เเบบง่าย
+           b = (b == nullptr)? headA : b->next; 
         }
         return a;
     }
