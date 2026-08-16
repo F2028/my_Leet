@@ -12,15 +12,19 @@ using namespace std;
 class Solution {
 public:
     vector<string> summaryRanges(vector<int>& nums) {
+        if (nums.empty()){
+            return vector<string>{};
+        }
         int start = 0;
         vector<string> result;
             for(int i = 0; i <= nums.size() - 1;i++){
-                if ( i == nums.size() - 1 || nums[i+1] - nums[i] != 1){ // check if it the last in vector , if it not continus
+                if ( i == nums.size() - 1 || (long long)nums[i+1] - nums[i] != 1){ // check if it the last in vector , if it not continus
                       if (nums[start] == nums[i] ){ //check ตัวช่วงที่จบไปว่าเป็นต่อเนื่องตัวเดียวไหม ''
                             result.push_back(to_string(nums[start])); // push int that turned to string
                             start = i + 1;   // we need to update this if not it will stay at the same and cant be use to calculated
-                      } else result.push_back(to_string(nums[start]) + "->" + to_string(nums[i])); 
-                }
+                      } else result.push_back(to_string(nums[start]) + "->" + to_string(nums[i]));
+                      start = i+1; 
+                }       
             }
             return result;
     }
