@@ -26,3 +26,15 @@ public:
         return ans;
     }
 };
+
+// follow up
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n + 1); // สร้าง vector ขนาด( n + 1)
+        for (int i = 0; i <= n;i++){ 
+           ans[i] = ans[i / 2] + (i % 2);  // [ตัดขวาออก] + [เช็คว่าขวานั้นเป็น 0 , 1]
+        }
+        return ans;
+    }
+};
