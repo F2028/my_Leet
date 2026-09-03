@@ -21,7 +21,7 @@ public:
         n = n >> 1; //shift ไป 1 ตัว , เลื่อนไป 1 bits
        }
        for (int i = 0; i < count;i++){ // วนตาม bits ที่ได้มาจาก count
-        mask = (mask << 1) | 1; // 
+        mask = (mask << 1) | 1; //การเพิ่ม 1 ที่เป็น bits ไป 1 รอบที่เลื่อนตาม bits ที่ได้มาจากcount
        }
        return mask ^ num;
     }
