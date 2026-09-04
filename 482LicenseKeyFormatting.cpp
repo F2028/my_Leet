@@ -15,7 +15,7 @@ public:
     string licenseKeyFormatting(string s, int k) {
         string result; //ไว้ return result ทั้งหมด
         int countstr = 0; // นับจำนวนอักษรที่เหลืออยู่
-        int count = 0; // นับจำนวนรอบที่เดินถ้า
+        int count = 0; // นับจำนวนgroupของข้อความ ที่เดิน
         for (int i = s.length() - 1;i >= 0;i--){ //เอาไว้นับคำทั้งหมดใน s
              if (s[i] != '-'){
                 countstr++;
