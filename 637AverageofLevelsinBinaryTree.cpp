@@ -24,27 +24,26 @@ struct TreeNode {
 class Solution {
 public:
     vector<double> averageOfLevels(TreeNode* root) {
-        vector<double> ans;
-        if (!root) return {};
-        queue<TreeNode*> q;
-        q.push(root);
-       while(!q.empty()){
-        double aver = 0;
+      vector<double> ans;
+      if (!root) return {};
+      queue<TreeNode*> q;
+      q.push(root);
+      while(!q.empty()){
         double sum = 0;
         int size = q.size();
-        for (int i = 0; i < size;i++){
-            TreeNode* cur = q.front();
-            q.pop();
-            if (cur->left){
-                q.push(cur->left);
+        for (int i = 0 ; i < size;i++){
+            TreeNode* cur = q.front(); // q.front คือเอาตัวเเรกของ q มา cur = q(ตัวเเรก)
+            q.pop();    //เอามาเเล้ว pop(เอาออก)
+            if (cur->left){ //ถ้า cur(ซ้าย) -> true
+                q.push(cur->left); //ให้ ดัน cur -> left เข้าไป q
             }
-            if (cur->right){
-                q.push(cur->right);
+            if (cur->right){ //เหมือนกัน
+                q.push(cur->right); //เหมือนกัน
             }
-            sum += cur->val;
+            sum += cur->val; //เอาผลรวมของ level มารวมกัน
         }
-        ans.push_back(aver = sum / size);
-       }
-       return ans;
+        ans.push_back(sum / size); // ดัน ค่าเฉลี่ยที่ (ผลรวมทั้งหมด(levelนันๆ) มาหาร size(q.size))
+      }
+      return ans;
     }
 };
