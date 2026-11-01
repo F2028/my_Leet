@@ -42,12 +42,14 @@ public:
         unordered_map<int , int> A;
         int missing = 0;
         int dup = 0;
-        for (auto i : nums){
+        for (auto i : nums){ //สร้าง key , ความถี่ให้ A
             A[i]++;
         }
         for (int i = 1; i <= nums.size();i++){
-            if (A[i] == 2) dup = i;   
+            if (A[i] == 2) dup = i;
             if (A[i] == 0) missing = i;
+            //ที่ใช้ A[i] คือเราเเค่ต้องการค่าที่มันปรากฎมาว่ากี่ครั้งถ้า == 2 มันคือเลขซ้ำ เลยให้ dup = iเพราะ i คือค่าตัวเลขจริงๆ
+            // missing ก็เหมือนกันมันจะเช็คระหว่าง 1 - n[ตัวที่เยอะที่สุด]ว่ามีความถี่เท่าไหร่บ้าง A[i] == 0 เลยให้missing เลย = i
         }
         return {dup , missing};
     }
