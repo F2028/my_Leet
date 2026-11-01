@@ -35,3 +35,20 @@ public:
          return {dup , missing}; // return
     }
 };
+
+class Solution { // unordermap
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        unordered_map<int , int> A;
+        int missing = 0;
+        int dup = 0;
+        for (auto i : nums){
+            A[i]++;
+        }
+        for (int i = 1; i <= nums.size();i++){
+            if (A[i] == 2) dup = i;   
+            if (A[i] == 0) missing = i;
+        }
+        return {dup , missing};
+    }
+};
