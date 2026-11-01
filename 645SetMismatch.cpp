@@ -29,10 +29,9 @@ public:
             //อีกอย่างคือเรา sort() ไว้เเล้ว
            }
          }
-         for (int i = 0; i < A.size();i++){ //กรณี หัวหรือท้ายหาย
+          //กรณี หัวหรือท้ายหาย
             if (A[0] != 1)  missing = 1;
             if (A[A.size()-1] != A.size()) missing = A.size();
-         }
          return {dup , missing}; // return
     }
 };
