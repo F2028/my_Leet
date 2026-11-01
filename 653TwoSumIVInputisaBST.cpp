@@ -39,7 +39,7 @@ public:
     }
 };
 
-class Solution { // lterative DSF
+class Solution { // lterative DFS
 public:
     bool findTarget(TreeNode* root, int k) {
         if (!root) return false;
@@ -55,6 +55,32 @@ public:
             } else oil.insert(cur->val); //ไม่เจอก็เก็บไว้
            if(cur->left) jay.push(cur->left); //เช็คก่อนว่ามัน nullptr ไหมถ้าไม่ ดันค่า cur.left เข้า jay
            if (cur->right) jay.push(cur->right);  //เช็คก่อนว่ามัน nullptr ไหมถ้าไม่ ดันค่า cur.right เข้า jay
+        }
+        return false;
+    }
+};
+
+class Solution { // DFS + 2 pointer + helper
+public:
+    void helper(TreeNode* root , vector<int>& A){ //ทำให้ทุกค่าของ node เข้าไปที่ vector A จากน้อย -> มาก
+        if (!root) return;
+        helper(root->left,A);
+        A.push_back(root->val);
+        helper(root->right,A);
+    }
+    bool findTarget(TreeNode* root, int k) {
+        vector<int> A;
+        helper(root,A);
+        if (A.size() < 2) return false;
+        int left = 0; //ตัวซ้าย
+        int right = A.size()-1; //ตัวขวา
+        while (left < right){ 
+            if (A[left] + A[right] == k) return true; //ถ้าเจอผลรวม = k return true;
+            if (A[left] + A[right] < k){ //ถ้า + กันเเล้วผลรวมน้อยกว่า k ให้ขยับซ้ายขึ้น
+                left++;
+            } else if (A[left] + A[right] > k) { //ถ้ามากกว่าให้ ลดขวาลง
+                right--;
+            }
         }
         return false;
     }
