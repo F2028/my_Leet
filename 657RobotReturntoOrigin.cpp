@@ -30,3 +30,17 @@ public:
         return x == 0 and y == 0;
     }
 };
+
+class Solution {  //อีกเเบบใช้ผลลัพของ boolean มาเป็น + , -
+public:
+    bool judgeCircle(string moves) {
+        int x = 0 , y = 0;
+       for (char a : moves){
+        x += (a=='L');
+        x -= (a=='R');
+        y += (a=='U');
+        y -= (a=='D');
+       }
+        return x == 0 and y == 0;
+    }
+};
