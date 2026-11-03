@@ -15,7 +15,7 @@
 using namespace std;
 class Solution {
 public:
-    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) { //การnested 4 loops
         int r = img.size(); // rows
         int c = img[0].size(); //this is collums
         vector<vector<int>> A(r , vector<int>(c , 0));
@@ -43,5 +43,44 @@ public:
             }
         }
         return A;
+    }
+};
+
+class Solution {  //2D Prefix Sum
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int r = img.size();
+        int c = img[0].size();
+        vector<vector<int>> prefix(r+1,vector<int>(c+1,0));
+        // prefix sum matrix
+        //เรากำลังเพิ่มแถวและคอลัมน์เพียงแต่เพิ่มเฉพาะใน Prefix Matrix เพื่อทำให้สูตรคำนวณง่ายขึ้น
+        vector<vector<int>> ans(r,vector<int>(c,0));
+        for (int i = 1; i <= r;i++){
+            for (int j = 1; j <= c;j++){
+            // i , j จะเริ่มที่ 0 ไม่ได้เพราะมันจะเป็น img[i-1][j-1] = img[-1][-1] อยู่นอก matrix
+                prefix[i][j] = img[i - 1][j-1]+prefix[i-1][j]+prefix[i][j-1]-prefix[i-1][j-1];
+         // prefix ใช้ Index เริ่มต้นที่ 1
+         // ส่วน img ใช้ Index เริ่มต้นที่ 0
+         // จึงต้องใช้ img[i-1][j-1] เพื่อเชื่อมตำแหน่งของทั้งสอง Matrix
+            }
+        }
+        for (int i = 0; i < r;i++){
+            for (int j = 0; j < c;j++){
+                int sum = 0;
+                int count = 0;
+                int r1 = max(0,i-1);// หา row เริ่่มต้นเเละจะต้องไม่ติดลบ
+                int r2 = min(r,i+2);// หา row endเเละต้องไม่เกินจำนวน row
+                int c1 = max(0,j-1);// หา collum เริ่่มต้นเเละจะต้องไม่ติดลบ
+                int c2 = min(c,j+2);// หา collum endเเละต้องไม่เกินจำนวน collum
+                // start = max ( 0, i - d[จำนวนตามช่อง flitterของโจท])
+                // end = min (r , i + d + 1)
+                sum = prefix[r2][c2]-prefix[r1][c2]-prefix[r2][c1] + prefix[r1][c1];
+                //สูตรหาผลบวก
+                count = (r2-r1) * (c2-c1);
+                //สูตรหาจำนวนช่องทั้งหมด
+                ans[i][j] = sum / count;
+            }
+        }
+        return ans;
     }
 };
