@@ -74,6 +74,10 @@ public:
                 int c2 = min(c,j+2);// หา collum endเเละต้องไม่เกินจำนวน collum
                 // start = max ( 0, i - d[จำนวนตามช่อง flitterของโจท])
                 // end = min (r , i + d + 1)
+                // r1 = Row เริ่มต้น
+                // r2 = Row สิ้นสุด (ไม่รวมตำแหน่ง r2)
+                // c1 = Column เริ่มต้น
+                // c2 = Column สิ้นสุด (ไม่รวมตำแหน่ง c2)
                 sum = prefix[r2][c2]-prefix[r1][c2]-prefix[r2][c1] + prefix[r1][c1];
                 //สูตรหาผลบวก
                 count = (r2-r1) * (c2-c1);
