@@ -45,3 +45,25 @@ public:
         return second;
     }
 };
+
+class Solution { // unorederset - dfs
+public:
+    void helper(TreeNode* root ,unordered_set<int>& A){
+        if (!root) return;
+        A.insert(root->val);
+        helper(root->left,A);
+        helper(root->right,A);
+    }
+    int findSecondMinimumValue(TreeNode* root) {
+        if (!root) return -1;
+        unordered_set<int> A;
+        int cadi = -1;
+        helper(root,A);
+        for (int a : A){
+            if (a > root->val and (cadi == -1 or a < cadi)){
+                    cadi = a;
+            }
+        }
+        return cadi;
+    }
+};
