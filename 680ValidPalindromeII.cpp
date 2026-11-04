@@ -29,3 +29,34 @@ public:
         return maxcount;
     }
 };
+
+class Solution {  // 2 pointer + no helper
+public:
+    bool validPalindrome(string s) {
+        int left = 0;
+        int right = s.length() -1;
+        while (left < right){
+            if (s[left] != s[right]){
+                //ข้ามตัวซ้าย
+                int l = left + 1;
+                int r = right;
+                while (l < r and s[l] == s[r]){
+                    l++;
+                    r--;
+                }
+                if (l>=r) return true;
+                //ลองข้ามขวา
+                l = left;
+                r = right -1;
+                while (l < r and s[l] == s[r]){
+                    l++;
+                    r--;
+                }
+                return l >= r;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
