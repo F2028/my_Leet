@@ -67,3 +67,22 @@ public:
         return cadi;
     }
 };
+
+class Solution { // set
+public:
+    void helper(TreeNode* root, set<int>& A){
+        if (!root) return;
+        A.insert(root->val);
+        helper(root->left,A);
+        helper(root->right,A);
+    }
+    int findSecondMinimumValue(TreeNode* root) {
+    if (!root) return -1;
+     set<int> A;
+     //set มันจะเรียงข้อมูลมาให้เเบบ auto เลยไม่ต้องใช้ for loop
+     helper(root,A);
+     auto b = A.upper_bound(root->val); //upper_bound คือถ้าเจอค่าเเรกที่มากกว่า root.val (ค่าที่น้อยที่สุดปัจจุบันของ node)
+     if (b == A.end())return -1; //ถ้าไม่เจอให้ return -1 ไป
+     return *b; //เจอนะครับผม
+    }
+};
