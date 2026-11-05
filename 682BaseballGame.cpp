@@ -41,7 +41,6 @@ public:
        for (string dragon : operations){
         if (dragon == "D"){
             int last = A.top();
-            A.pop();
             A.push(last * 2);
             total += last * 2;
         }else if (dragon == "C"){
@@ -55,7 +54,10 @@ public:
             A.push(last);
             A.push(last + lastprev);
             total += last + lastprev;
-        }else A.push(stoi(dragon)) , total += stoi(dragon);
+        }else {
+            int last = stoi(dragon);
+            A.push(last) , total += last;
+        }
        }
        return total;
     }
