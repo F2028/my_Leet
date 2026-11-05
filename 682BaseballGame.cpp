@@ -32,3 +32,31 @@ public:
         //ตัวที่ 2 ถึงท้ายสุด
     }
 };
+
+class Solution { //ใช้ stack
+public:
+    int calPoints(vector<string>& operations) {
+        stack<int> A;
+        int total = 0;
+       for (string dragon : operations){
+        if (dragon == "D"){
+            int last = A.top();
+            A.pop();
+            A.push(last * 2);
+            total += last * 2;
+        }else if (dragon == "C"){
+            int last = A.top();
+            A.pop();
+            total -= last;
+        }else if (dragon == "+"){
+            int last = A.top();
+            A.pop();
+            int lastprev = A.top();
+            A.push(last);
+            A.push(last + lastprev);
+            total += last + lastprev;
+        }else A.push(stoi(dragon)) , total += stoi(dragon);
+       }
+       return total;
+    }
+};
