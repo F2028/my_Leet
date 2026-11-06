@@ -53,6 +53,9 @@ public:
     bool hasAlternatingBits(int n) { 
         int oilxjay = n ^ (n >> 1); // เช่น 5 = 101 = 010 101 ^ 010 = 111
         //ให้ n ทำ xor กับ n ที่ bits ขยับไปฝั่งขวา 1 ช่อง
-        return (oilxjay & (oilxjay + 1)) == 0;
+        return (oilxjay & (oilxjay + 1)) == 0; // ให้ oilxjay and oilxjay + 1 ว่า == 0 ไหม
+        //เช่น 111 & (111 + 1 = 1000)  = 0000 เพราะ?
+        //การบวก bits เช่น 0111 - 7
+                    //   0001 - 1 = 1000 กฎของ AND จะได้ 1 ก็เมื่อ 2 ฝั่งเป็น 1 เหมือนกัน
     }
 };
