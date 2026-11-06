@@ -39,11 +39,20 @@ public:
     bool hasAlternatingBits(int n) {
         int prev = -1;
         while (n > 0){
-            int a = n & 1;
+            int a = n & 1; //ให้ a = bits ของ n ที่ขยับขวาหนึ่งครั้ง
             if (a == prev) return false;
             prev = a;
-            n >>= 1;
+            n >>= 1; // ความหมาย n = n >> 1 
         }
         return true;
+    }
+};
+
+class Solution { //XOR + Bit Trick
+public: 
+    bool hasAlternatingBits(int n) { 
+        int oilxjay = n ^ (n >> 1); // เช่น 5 = 101 = 010 101 ^ 010 = 111
+        //ให้ n ทำ xor กับ n ที่ bits ขยับไปฝั่งขวา 1 ช่อง
+        return (oilxjay & (oilxjay + 1)) == 0;
     }
 };
