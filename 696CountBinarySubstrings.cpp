@@ -58,3 +58,27 @@ public:
         return ans;
     }
 };
+
+class Solution {
+public:
+    int countBinarySubstrings(string s) { //vector
+    vector<int> A;
+    int count = 1;
+    for (int i = 1; i < s.size();i++){ //loop for store each groups value
+        if (s[i] == s[i-1]){ // if it the same continue counting
+            count++;
+        }else {
+            A.push_back(count); //if not push count to vector
+            count = 1; //reset it value back to 1
+        }
+     }
+     A.push_back(count);//dont forget push does it job but loop doesnt so we need another one at the end
+     int ans = 0;
+     for (int i = 1; i < A.size();i++){ // loop to find answer
+        ans += min(A[i],A[i-1]); //instead use the pairs one we use the length to do the calculate
+     // all the solutions lead to this math
+     // ans += min(previous , current group)
+    }
+      return ans;
+    }
+};
