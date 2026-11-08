@@ -33,3 +33,28 @@ public:
         return ans;
     }
 };
+
+class Solution { // 2 pointer , group expan
+public:
+    int countBinarySubstrings(string s) {
+        int ans = 0;
+        int i = 0;
+        while (i < s.size()){
+           int j = i; // current groups
+           while (j < s.size() and s[j] == s[i]){ // if j lower than s size and value
+            // in s[j] and s[i] is the same
+            j++; // we continue counting groups member
+           }
+           if (j == s.size()) break;
+           int k = j;
+           while (k < s.size() and s[k] == s[j]){ // same as above
+            k++;
+           }
+           ans += min(j - i , k - j); // its just math 
+           // basically its just do like 00 | 11 | 00 | 1  and we can get like 000 111 
+           //Because we need equal numbers of zeros and ones in each substring.
+           i = j; // move the start position to second group
+        }
+        return ans;
+    }
+};
