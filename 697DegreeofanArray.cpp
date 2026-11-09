@@ -79,3 +79,24 @@ public:
         return length;
     }
 };
+
+class Solution {  //วน array เดียวไม่เก็บ last
+public:         
+    int findShortestSubArray(vector<int>& nums) {
+       unordered_map<int , pair<int , int>> A; // .first freq , second is first Index
+        int degree = 0;
+        int ans = 0;
+        for (int i = 0; i < nums.size();i++){ //ใช้ I หา last Index เเทน
+            int x = nums[i];
+            A[x].first++;
+            if (A[x].first == 1) A[x].second = i;
+            if (A[x].first > degree){
+                degree = A[x].first;
+                ans = i - A[x].second + 1;
+            }else if (A[x].first == degree){
+                ans = min(ans, i - A[x].second + 1);
+            }
+        }
+        return ans;
+    }
+};
