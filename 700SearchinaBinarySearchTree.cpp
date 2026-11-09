@@ -39,3 +39,21 @@ public:
     }
 };
 
+class Solution { //เเบบ lterative + stack  Runtime 0 ms , Mem 79.78 %
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if (!root) return nullptr;
+        stack<TreeNode*> Boss;
+        Boss.push(root);
+        while (!Boss.empty()){
+            TreeNode* Ans = Boss.top(); 
+            Boss.pop();
+            if (Ans->val == val){
+                return Ans; // return ans cuz we use ans as our "Root" not the regular "root" of fn 
+            }
+            if (Ans->right) Boss.push(Ans->right); //check first if is it nullptr
+            if (Ans->left) Boss.push(Ans->left); //check nullptr first
+        }
+        return nullptr;
+    }
+};
