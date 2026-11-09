@@ -57,3 +57,18 @@ public:
         return nullptr;
     }
 };
+
+class Solution { //เเบบ lterative BST bainary tree search 
+public:          // Runtime 0 ms , Mem 99.69 %
+    TreeNode* searchBST(TreeNode* root, int val) {
+        TreeNode* curr = root; // curren root we seaching
+        while (curr){ //ถ้า curr ยังไม่เป็น nullptr
+            if (curr->val == val){
+                return curr;
+            }else if (curr->val > val){ //ถ้าค่าที่เจอน้อยกว่า curr.val เปลี่ยนให้เป็น ฝั่งซ้าย
+                curr = curr->left;
+            }else curr = curr->right; //ไม่ก็เปลี่ยนเป็นฝั่งขวา
+        }
+        return nullptr;
+    }
+};
