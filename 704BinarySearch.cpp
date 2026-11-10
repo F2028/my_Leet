@@ -16,7 +16,7 @@
 using namespace std;
 class Solution {
 public:
-    int search(vector<int>& nums, int target) { //ตัดครี่งหา
+    int search(vector<int>& nums, int target) { //ตัดครี่งหา -> bainary search
         int L = 0;
         int R = nums.size() - 1; 
        while (L <= R){ //ถ้าซ้ายยังน้อยกว่าขวา
@@ -28,5 +28,21 @@ public:
         }else R = mid - 1; //เหมือนกันเเต่ตัดฝั่งขวาออก
        }
        return -1;
+    }
+};
+
+class Solution { //ทำเเบบ recursion
+public:
+    int helper(vector<int>& nums , int target , int L , int R) {
+            if (L > R) return -1; // base case every recursion dont need loops only base case
+            int mid = L + (R - L) / 2;
+            if (nums[mid] == target) return mid;
+            if (nums[mid] < target) return helper(nums , target ,  mid + 1 , R);
+            else return helper(nums, target , L , mid-1);
+    }
+    int search(vector<int>& nums, int target) {
+       int L = 0;
+       int R = nums.size() - 1;
+       return helper(nums,target,L,R);
     }
 };
