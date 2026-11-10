@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unordered_map>
 #include <map>
 #include <vector>
 #include <algorithm>
@@ -62,5 +61,28 @@ public:
         return *points.begin(); //why *points? 
         // In C++, * can be used to dereference a pointer or iterator.
         //Dereference means: Get the value stored at the position we're pointing to
+    }
+};
+
+class KthLargest { //sorted vector
+public:
+    int k;
+    vector<int> points;
+    KthLargest(int k, vector<int>& nums) :k(k) {
+            points = nums;
+            sort(points.begin() , points.end());
+            while(points.size() > k){
+                points.erase(points.begin()); // can we use front? // no cuz front return the value
+                // erase need the lterator point to not the value of vector.
+            }
+        }
+
+    int add(int val) {
+        auto A = lower_bound(points.begin() , points.end() , val);
+        points.insert(A , val); //insert ใน vector คือ points.insert(ตำเเหน่งที่จะให้มันอยู่ , value(ค่า))
+        if (points.size() > k){
+            points.erase(points.begin());
+        }
+        return points.front(); // points.front() [return the value not the lterator]
     }
 };
