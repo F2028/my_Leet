@@ -58,3 +58,12 @@ public:
         else return - 1;
     }
 };
+
+class Solution { //vector find //ไม่นับใน solution นี้เเค่อยากให้เห็นว่า มันสามารถทำได้ใน solution คล้ายๆกัน
+public: //solution นี้ต้องการ o long n find = o(n)
+    int search(vector<int>& nums, int target) {
+        auto A = find(nums.begin() , nums.end(), target);
+        if (A != nums.end()) return A - nums.begin();
+        else return -1;
+    }
+};
