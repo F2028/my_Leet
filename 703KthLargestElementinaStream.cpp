@@ -40,3 +40,27 @@ public:
         return pq.top();
     }
 };
+
+class KthLargest { //use mutiset
+public:
+    int k;
+    multiset<int> points;
+    KthLargest(int k, vector<int>& nums) :k(k) {
+        for (int a : nums){
+            points.insert(a);
+            if (points.size() > k){
+                points.erase(points.begin()); //erase -> remove , .begin() is the smallest numbers
+                }
+            }
+        }
+
+    int add(int val) {
+    points.insert(val);
+       if (points.size() > k){
+            points.erase(points.begin());
+        }
+        return *points.begin(); //why *points? 
+        // In C++, * can be used to dereference a pointer or iterator.
+        //Dereference means: Get the value stored at the position we're pointing to
+    }
+};
