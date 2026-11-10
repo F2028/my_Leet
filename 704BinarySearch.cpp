@@ -46,3 +46,15 @@ public:
        return helper(nums,target,L,R);
     }
 };
+
+class Solution { // STL bainary search
+public:
+    int search(vector<int>& nums, int target) {
+        auto A = lower_bound(nums.begin() , nums.end() , target);
+        // ให้ A = หาว่าตั้งเเต่ nums.begin(เริ่มต้น) จนถึง nums.end(จนจบ) หาค่า target
+        // lower_bound return Lterator กลับมา เพราะงั้นถ้ามันชี้ example 9[index 5]
+        // return A[5] - nums.begin[0] = int 5 not Lterator 5
+        if (A != nums.end() && *A == target) return A - nums.begin(); //why A - nums.begin?
+        else return - 1;
+    }
+};
