@@ -72,3 +72,59 @@ public:
         return false;
     }
 };
+
+class MyHashSet { // open addresing
+public:
+    static constexpr int cap = 2000003;
+    static constexpr int empty = -1; //เอาไว้ ดูว่ามันว่างไหม -1 ไม่มีอยู่ใน vector , index จริง
+    static constexpr int deleted = -2; // คือเอาไว้ลบ -1 เอาไว้กำหนดช่องว่าง
+    vector<int> A;
+    MyHashSet() : A(cap , empty) {
+        
+    }
+
+     int hash(int key){
+        return key % cap; //formula key mod buck
+    }
+    
+    void add(int key) {
+        int deleteindex = -1;
+        for (int i = 0 ; i < cap ;i++){
+            int index = (hash(key) + i) % cap;
+            if (A[index] == key) return; //ถ้าเกิดเจอ key อยู่ใน index อยู่เเล้ว return เพราะ dup
+            if (A[index] == deleted and deleteindex == -1) { //ในกรณีที่มันถูกลบไปเเล้ว
+                deleteindex = index; //ให้ จำค่า index ไว้ เพิ่ม add ทีหลัง
+            }
+            if (A[index] == empty){ // ถ้าช่องว่าง
+                int cur = (deleteindex != -1) ? deleteindex : index; // if - else short cut
+                // ให้ดูว่า ไอ่ค่าทีถูกลบถูกจำไว้ไหมถ้าใช้ ให้ใช้ index อันนั้น add(key) เข้าไป ถ้าไม่ ให้ใช้ index ปัจจุบัน
+                A[cur] = key;
+                return;
+              }
+            }
+            if (deleteindex != -1){ // เอาไว้กัน edge case เผื่อหลุดมา
+                A[deleteindex] = key;
+        }
+    }
+    
+    void remove(int key) { // ลบ ดูเเค่ เจอ key , keyว่าง ให้ return กลับ
+        for (int i = 0 ; i < cap ;i++){
+            int index = (hash(key) + i) % cap;
+            if (A[index] == key) { // ถ้าเจอ
+                A[index] = deleted; // ลบ
+                return ;
+            }
+            if (A[index] == empty){ //ช่องมันว่าง return เพราะไม่มีไรให้ลบ 
+                return;
+            }
+        }
+    }
+    
+    bool contains(int key) { // เช็คว่ามีเลขนั้นจริงรึไม่
+        for (int i = 0 ; i < cap ;i++){
+            int index = (hash(key) + i) % cap;
+            if (A[index] == key) return true; // ถ้าเจอ return true;
+            } 
+            return false;
+        }  
+};
