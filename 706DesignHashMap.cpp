@@ -69,3 +69,39 @@ public:
         }
     }
 };
+
+class MyHashMap { // STL + find if
+public:
+    vector<pair<int , int>> A;
+    MyHashMap() {
+        
+    }
+    
+    void put(int key, int value) {
+      auto oil = find_if(A.begin() , A.end() , // เริ่มหาจาก A[start] -> A[end]
+            [key] (const pair<int , int> &p){ // นำ key มาใช้
+                // p คือเเต่ละตัวที่ find_if ส่งเข้ามาใน pair
+                return p.first == key;  //ตรวจว่าสิ่งที่กำลังตรวจ ตรงกับ ที่กำลังหาไหม
+            });
+            if (oil == A.end()){ // oil คือ lterator
+                A.push_back({key , value}); // กรณีที่ไม่เจอ key
+            } else oil->second = value; // ถ้าเจอก็เเค่เปลี่ยน value
+    }
+    int get(int key) {
+        auto sarun = find_if(A.begin() , A.end(),
+        [key](const pair<int,int>&p){ // can use auto instead of pair
+            return p.first == key;
+        });
+        if (sarun == A.end()) return -1;
+        return sarun->second;
+    }
+    
+    void remove(int key) {
+       auto sarun = find_if(A.begin() , A.end(),
+        [key](const pair<int,int>&p){
+            return p.first == key;
+        });
+        if (sarun != A.end()) A.erase(sarun); // sarun =  entire pair
+        // sarun -> second = value
+    }
+};
