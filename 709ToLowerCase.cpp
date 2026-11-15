@@ -31,3 +31,24 @@ public:
         //ใช้ & เพราะเราไม่ต้องการ x ที่เป็น copy ของ s เลยใช้ & เพื่อเอาค่า s ใส่ใน x เเต่ไม่ copy เปลี่ยน x = เปลี่ยน s
     }
 };
+
+class Solution { // use math and  ASCII characters
+public:
+    string toLowerCase(string s) {
+        for (char& x : s){
+            if (x >= 'A' && x <= 'Z') x += 32;  
+        }
+        return s;
+    }
+};
+
+class Solution { // use math and  ASCII characters
+public:
+    string toLowerCase(string s) {
+        for (char& x : s){
+            if (x >= 'A' && x <= 'Z') x += ('a' - 'A'); 
+            // why a - A? cuz a = 97 A = 65 = 97 - 65 = 32 same as we use x += 32
+        }
+        return s;
+    }
+};
