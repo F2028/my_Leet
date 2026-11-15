@@ -26,3 +26,19 @@ public:
         return i == bits.size() - 1; //เช็ค
     }
 };
+
+class Solution {
+public:
+    bool isOneBitCharacter(vector<int>& bits) {
+        int i = 0;
+        int size = bits.size(); // if we store some value that need to calculate more than 1
+        // its better to store it to save memory
+        while (i < size - 1){
+            i += bits[i] + 1; // why worked?
+            // cuz let say [1,0,0] if 1 + 1 = 2 , 0 + 1 = 1 its similair isnt it?
+            //its like i++ , i+= 2 we use the value that it store to calculte
+            // than calculate it ourself
+        }
+        return i == size - 1;
+    }
+};
