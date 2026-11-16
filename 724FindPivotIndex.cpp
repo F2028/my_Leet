@@ -18,7 +18,23 @@ class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
         int left = 0;
-        int total = accumulate(nums.begin() , nums.end() , 0);
+        int total = accumulate(nums.begin() , nums.end() , 0); // accumulate(begin , end , started value)
+        for (int i = 0; i < nums.size();i++){
+            if (left == total - left - nums[i]) return i;
+            left += nums[i];
+        }
+        return -1;
+    }
+};
+
+class Solution { // use loop instead of accumulate
+public:
+    int pivotIndex(vector<int>& nums) {
+        int left = 0;
+        int total = 0;
+        for (int x :nums){
+            total += x;
+        }
         for (int i = 0; i < nums.size();i++){
             if (left == total - left - nums[i]) return i;
             left += nums[i];
