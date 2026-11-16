@@ -27,7 +27,7 @@ public:
     }
 };
 
-class Solution {
+class Solution { // use math 
 public:
     bool isOneBitCharacter(vector<int>& bits) {
         int i = 0;
@@ -40,5 +40,17 @@ public:
             // than calculate it ourself
         }
         return i == size - 1;
+    }
+};
+
+class Solution {
+public:
+    bool isOneBitCharacter(vector<int>& bits) {
+        int count = 0;
+        for (int i = bits.size() - 2; i >= 0 and bits[i] == 1;i--) count++;  
+        // We start at the index immediately before the last element and move backwards 
+        // while we encounter consecutive ones
+        // we let count + 1 
+        return count % 2 == 0;  
     }
 };
