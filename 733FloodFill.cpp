@@ -14,7 +14,7 @@
 #include <stack>
 #include <numeric>
 using namespace std;
-class Solution {
+class Solution { // depth first search , DFS = recursion
 public:
     void helper(vector<vector<int>>& image ,int sr , int sc , int original , int color){
         
@@ -31,6 +31,35 @@ public:
         int original = image[sr][sc];
         if (original == color) return; // ถ้าสีเดียวกันตั่งเเต่เริ่มให้ return อก
         helper(image , sr , sc , original , color);
+        return image;
+    }
+};
+
+class Solution { //BFS  = avoid recursion
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        if (image[sr][sc] == color) return image;
+        vector<pair<int,int>> udlr = {{1,0} , {-1,0} , {0,1} , {0,-1}};
+        //เอ่ไว้หา 4 ทาง บน ,ล่าง , ขวา , ซ้าย
+        queue<pair<int,int>> q;
+        int oldcolor = image[sr][sc]; // กำหนดสีเก่าก่อน pop
+        q.push({sr,sc});
+        image[sr][sc] = color; // กำหนดให้จุดนี้เปลี่ยน เป็นอีกสีที่ต้องการ
+        while(!q.empty()){
+            pair<int,int> A = q.front(); //เพื่อ? //กำหนดตัวเเรกให้มัน
+            int a = A.first , b = A.second; //เพิ่อ? // A.first = row , A.second = collums
+            q.pop(); //ลบตัวหน้าสุดออก ทำงาน LIFO
+            for (pair<int,int>& x : udlr){ // เดินทั้ง 4 ทาง
+                int dr = a + x.first;
+                int dc = b + x.second;
+                if (dr >= 0 and dr < image.size() and dc >= 0 and dc < image[0].size()
+                and image[dr][dc] == oldcolor) {
+                // เช็คว่าเกินขอบเขตไหมทั้ง 4 ทาง เเละ ถ้าเป็นสีเดิมอยู่
+                image[dr][dc] = color; //เปลี่ยน
+                q.push({dr,dc}); //เเละดัน //เพิ้อ?
+                }
+            }
+        }
         return image;
     }
 };
