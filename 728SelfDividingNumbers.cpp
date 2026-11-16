@@ -59,3 +59,30 @@ public:
         return ans;
     }
 };
+
+class Solution {  // let fn reponsibility we do only return
+public:
+    vector<int> helper(int left , int right , vector<int>& A){ 
+        int digit = 0;
+        for (int i = left ; i <= right;i++){ 
+            int temp = i; 
+            bool real = true;
+            while (temp > 0){ 
+                digit = temp % 10; 
+                if (digit == 0 or i % digit != 0){
+                    real = false; 
+                    break;
+                }
+                temp /= 10; 
+            }
+            if (real) A.push_back(i);
+        }
+        return A;
+        
+    }
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> ans;
+        return helper(left , right , ans);
+      
+    }
+};
