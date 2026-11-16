@@ -37,3 +37,25 @@ public:
         return ans;
     }
 };
+
+class Solution { // Mathmethic + no use boolean + helper
+public:
+    bool helper(int num){ //ใช้เอาเเทนการใช้ boolean
+            for (int p = 1 ; p <= num;p*=10){
+                int digit = (num / p) % 10;
+                if (digit == 0 or num % digit != 0){
+                    return false;
+                }
+            }
+        return true;
+    }
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> ans;
+        for (int i = left; i <= right;i++){
+            if (helper(i)){
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
