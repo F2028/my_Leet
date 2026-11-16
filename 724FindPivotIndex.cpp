@@ -61,3 +61,21 @@ public:
         return -1;
     }
 };
+
+class Solution { // prefix sum + suffix sum
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> left(n , 0); //ขนาด size = n เริ่มที่ 0 ทุกตัว
+        for (int i = 1; i < nums.size();i++){
+            left[i] = left[i-1] + nums[i - 1];
+        }
+        int right = 0;
+        int ans = -1;
+        for (int i = n - 1; i >= 0;i--){
+            if (left[i] == right) ans = i;
+            right += nums[i];
+        }
+        return ans;
+    }
+};
