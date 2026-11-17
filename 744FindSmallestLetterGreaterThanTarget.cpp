@@ -42,3 +42,13 @@ public:
         //จะ return ตัวเเรกกรณีหาบ่เจอ
     }
 };
+
+class Solution { // upper bond ทำ bainary search ให้เลย
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        auto it = upper_bound(letters.begin() , letters.end() , target);
+        // return lterator
+        if (it == letters.end()) return letters[0];
+        return *it; //เลยใช้ ref
+    }
+};
