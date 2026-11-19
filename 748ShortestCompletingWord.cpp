@@ -13,6 +13,7 @@
 #include <queue>
 #include <stack>
 #include <numeric>
+#include <array>
 using namespace std;
 class Solution {
 public:
@@ -37,5 +38,31 @@ public:
             // คำตอบยังไม่มีคำ ถ้าเกิด คำตอบ(toon) มีคำเเล้วเเต่เจอคำที่สั้นกว่า เลยให้คำ(toon) = คำ(b)
         }
         return toon;
+    }
+};
+
+
+class Solution { // single loop
+public:
+    string shortestCompletingWord(string licensePlate, vector<string>& words) {
+        string toon = "";
+        int total = 0;
+      array<int , 26> plate{}; // การ copy ค่า
+       for (char a : licensePlate){
+        if (isalpha(a)) plate[tolower(a) - 'a']++ , total++;
+       }
+       for (string b : words){ 
+        int remain = total;
+        bool pass = false;
+        array<int , 26> word{}; //การ copy ค่า
+        for (char c : b){ // เปรียบเทียบ
+            int C = c - 'a';
+            if (word[C] < plate[C]) remain--;
+            word[C]++;
+            if (remain == 0) {pass = true; break;} // ย่อ 2 if เป็น if เดียว
+        }
+       if (pass and (toon.empty() or toon.size() > b.size())) toon = b;
+     }
+     return toon;
     }
 };
