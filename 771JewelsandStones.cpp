@@ -53,3 +53,18 @@ public:
         return count;
     }
 };
+
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        bool A[128];
+        for (char a : jewels){
+            A[a] = true;
+        }
+        int count = 0;
+        for (char a : stones){
+            if (A[a]) count++;
+        }
+        return count;
+    }
+};
