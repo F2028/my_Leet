@@ -41,3 +41,15 @@ public:
         return count;
     }
 };
+
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        unordered_set<char> A(jewels.begin() , jewels.end());
+        int count = 0;
+        for (char a : stones){
+            if (A.count(a)) count++;
+        }
+        return count;
+    }
+};
