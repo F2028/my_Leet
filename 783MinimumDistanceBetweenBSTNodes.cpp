@@ -58,3 +58,25 @@ public:
         return mini;
     }
 };
+
+class Solution { // stack
+public:
+    int minDiffInBST(TreeNode* root) {
+        int prev = -1;
+        int mini = INT_MAX;
+        stack<TreeNode*> A; //เก็บเป็น treenode
+        TreeNode* B = root; //ใ้ช B เเทนเพราะจะไม่ยุ่งกะ root
+        while (B or !A.empty()){
+            while (B) { // ดันฝั่งซ้ายเข้าสุด
+                A.push(B); // push ก่อนเพราะถ้าขยับจะเป็น 1 -> 2 not 0 -> 1
+                B = B->left;
+            }
+            TreeNode* toon = A.top(); // ตั่งให้เปนตัวล่าสุดที่จะเอาไว้ pop
+            A.pop();
+            if (prev != -1) mini = min(mini , toon->val - prev);
+            prev = toon->val;
+            B = toon->right;
+        }
+        return mini;
+    }
+};
