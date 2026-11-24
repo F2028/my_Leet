@@ -40,3 +40,21 @@ public:
         return mini;
     }
 };
+
+class Solution { // ใช้ prev , mini
+public:
+    int prev = -1;
+    int mini = INT_MAX;
+    void inorder(TreeNode* root){
+        if (!root) return;
+        inorder(root->left);
+        if (prev != -1) mini = min(mini , root->val - prev);
+        //ถ้า prev มี ค่าเเล้วให้หาค่าน้อยระหว่าง = ตัวmini กับ ค่า ปัจจุบัน
+        prev = root->val; // เเละ update ค่า
+        inorder(root->right);
+    }
+    int minDiffInBST(TreeNode* root) {
+        inorder(root);
+        return mini;
+    }
+};
