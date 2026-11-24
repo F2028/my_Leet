@@ -41,3 +41,24 @@ public:
         return true;
     }
 };
+
+class Solution {
+public:
+    bool isToeplitzMatrix(vector<vector<int>>& matrix) {
+        unordered_map<int , int> A;
+        for (int i = 0 ; i < matrix.size();i++){ // ทำไมเริ่มที่ 0?
+        // เพราะ Hash Map ต้องเก็บค่าแรกของทุกแนวทแยง ไม่ใช่แค่ [0][0]
+        //งั้นไม nested เริ่มที่ 1? เพราะ Nested Loop ใช้วิธีเปรียบเทียบกับช่องบนซ้ายโดยตรง
+        //ส่วน Hash Map ต้องเก็บค่าแรกของแต่ละแนวทแยงไว้ก่อน เพื่อใช้เปรียบเทียบกับช่องถัดไป
+            for (int j = 0 ; j < matrix[0].size();j++){
+                int key = i - j; // คือ key ในการหาช่อง value = matrix[i][j]
+                if (!A.count(key)){ // ถ้าหาไม่เจอ
+                    A[key] = matrix[i][j];
+                } else { // ถ้าเจอ
+                    if (A[key] != matrix[i][j]) return false; //check value ตรงกันไหม?
+                }
+            }
+        }
+        return true;
+    }
+};
