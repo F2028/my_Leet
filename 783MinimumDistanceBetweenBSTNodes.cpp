@@ -80,3 +80,25 @@ public:
         return mini;
     }
 };
+
+class Solution { // sample code
+public:
+    TreeNode* prev = NULL;
+    int minDiffInBST(TreeNode* root) {
+        int mini = INT_MAX;
+        if (!root) return INT_MAX;
+        if(root->left){
+            int left = minDiffInBST(root->left);
+            mini = min(mini , left);
+        }
+        if (prev){
+            mini = min(mini , root->val - prev->val);
+        }
+        prev = root;
+        if (root->right){
+            int right = minDiffInBST(root->right);
+            mini = min(mini , right);
+        }
+        return mini;
+    }
+};
