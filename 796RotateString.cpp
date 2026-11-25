@@ -56,3 +56,40 @@ public:
         return false;
     }
 };
+
+class Solution { // LPS
+public:
+    bool rotateString(string s, string goal) {
+        if (s.size() != goal.size()) return false;
+        if (s.empty()) return true;
+        int n = s.size();
+        vector<int> lps(goal.size(),0); //เอาไว้ เก็บค่า ปัจจุบัน
+        int lens = 0;   // เอาไว้เก็บความยาว
+        int i = 1;   // เอาไว้เช็ค
+        while (i < n){
+            if (goal[i] == goal[lens]){
+                lens++;
+                lps[i] = lens;
+                i++;
+            } else if (lens > 0){
+                lens = lps[lens-1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+        int j = 0; // goal
+        int k = 0; // s + s
+        string a = s + s;
+        while (k < 2 * n){
+        if (a[k] == goal[j]){
+            j++;
+            k++;
+        } else if (j > 0){
+            j = lps[j-1];
+        } else k++;
+        if (j == goal.size()) return true;
+        }
+        return false;
+    }
+};
