@@ -46,3 +46,18 @@ public:
         return {line , total};
     }
 };
+
+class Solution {
+public:
+    vector<int> numberOfLines(vector<int>& widths, string s) {
+        pair<int , int> ans = {0 , 1}; // .second เก็บจำวนวน line first = total;
+        for (char a : s){
+            int b = widths[a -'a'];
+            if (ans.first + b > 100){
+                ans.second++;
+                ans.first = b;
+            } else ans.first += b;
+        }
+        return {ans.second , ans.first};
+    }
+};
