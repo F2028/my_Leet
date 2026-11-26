@@ -30,3 +30,19 @@ public:
         return {lines , totalcount};
     }
 };
+
+class Solution {
+public:
+    vector<int> numberOfLines(vector<int>& widths, string s) {
+        int total = 0;
+        int line = 1;
+        for (char a : s){
+            int b = widths[a - 'a'];
+            if (total + b > 100){
+                line++;
+                total = b;
+            } else total += b;
+        }
+        return {line , total};
+    }
+};
