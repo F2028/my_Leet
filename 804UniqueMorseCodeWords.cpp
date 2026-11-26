@@ -50,3 +50,21 @@ public:
         return ans.size();
     }
 };
+
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        string word[26] = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",
+        ".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        set<string> ans;
+        for (string A : words){
+            string temp = "";
+            for (char B : A){
+                int index = B - 'a';
+                temp += word[index];
+            }
+            ans.insert(temp);
+        }
+        return ans.size();
+    }
+};
