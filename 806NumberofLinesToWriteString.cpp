@@ -61,3 +61,27 @@ public:
         return {ans.second , ans.first};
     }
 };
+
+class Solution {
+public:
+    struct info {
+        int total = 0;
+        int line = 1;
+
+        void helper(vector<int>& widths, string s) {
+        for (char a : s){
+            int b = widths[a - 'a'];
+            total += b; // access ได้เลยเพราะเป็นของ struct
+            if (total> 100){
+                line++;
+                total = b;
+            }
+        }
+    }
+};
+    vector<int> numberOfLines(vector<int>& widths, string s) {
+        info A;
+        A.helper(widths , s);
+        return {A.line , A.total};
+    }
+};
