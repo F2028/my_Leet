@@ -37,3 +37,27 @@ public:
         return ans;
     }
 };
+
+class Solution { // Cross Product ใช้ vector เเทนสูตร เเต่สูตรเหมือนกันนะ
+public:
+    double helper(vector<int>&p1 ,vector<int>&p2,vector<int>&p3){
+        int ab_x = p2[0] - p1[0];
+        int ab_y = p2[1] - p1[1];
+        int ac_x = p3[0] - p1[0];
+        int ac_y = p3[1] - p1[1];
+        return 0.5 * abs((1.0 * ab_x * ac_y) - (1.0 * ab_y * ac_x));
+    }
+    double largestTriangleArea(vector<vector<int>>& points) {
+        int n = points.size();
+        double ans = 0;
+        for (int i = 0; i < n - 2;i++){ 
+            for (int j = i + 1;j < n - 1;j++){ 
+                for (int k = j + 1; k < n;k++){ 
+                    double area = helper(points[i] , points[j] , points[k]);
+                    ans = max(ans , area);
+                }
+            }
+        }
+        return ans;
+    }
+};
